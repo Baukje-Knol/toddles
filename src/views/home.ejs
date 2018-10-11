@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/home.css" />
+</head>
+
+<body>
+    <section id="nav">
+        <%- include('header'); -%>
+    </section>
+
+    <section id="bigbox">
+        <section id="aboutproduct">
+            <p>Fun and educational night time stories!</p>
+            <p>Register and try for free</p>
+            <p>Premium for €4,99/month</p>
+        </section>
+
+        <section id="bookcovers">
+            <div class="book">
+                <img src="./images/bookicon.svg">
+            </div>
+            <div class="book">
+                <img src="./images/bookicon.svg">
+            </div>
+            <div class="book">
+                <img src="./images/bookicon.svg">
+            </div>
+        </section>
+    </section>
+
+
+    <section id="register">
+        <form action="/register">
+            <input type="submit" value="Register" />
+        </form>
+    </section>
+
+
+    <section id="footer">
+        <%- include('footer'); -%>
+    </section>
+</body>
+
+</html>

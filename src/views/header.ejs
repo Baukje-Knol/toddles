@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/header.css" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Capriola" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav id="navbar" class="">
+        <div class="nav-wrapper">
+            <!-- Navbar Logo -->
+            <div class="logo">
+                <!-- Logo Placeholder for Inlustration -->
+                <a href="#home"><img id="logoimg" src="./images/logo.png"></a>
+            </div>
+
+            <!-- Navbar Links -->
+            <ul id="menu">
+                <li><a href="#login">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- Menu Icon -->
+    <div class="menuIcon">
+        <span class="icon icon-bars"></span>
+        <span class="icon icon-bars overlay"></span>
+    </div>
+
+
+<script type="text/javascript">
+
+    // Navigation
+        // Responsive Toggle Navigation =============================================
+        let menuIcon = document.querySelector('.menuIcon');
+        let nav = document.querySelector('.overlay-menu');
+
+        menuIcon.addEventListener('click', () => {
+            if (nav.style.transform != 'translateX(0%)') {
+                nav.style.transform = 'translateX(0%)';
+                nav.style.transition = 'transform 0.2s ease-out';
+            } else { 
+                nav.style.transform = 'translateX(-100%)';
+                nav.style.transition = 'transform 0.2s ease-out';
+            }
+        });
+
+
+        // Toggle Menu Icon ========================================
+        let toggleIcon = document.querySelector('.menuIcon');
+
+        toggleIcon.addEventListener('click', () => {
+            if (toggleIcon.className != 'menuIcon toggle') {
+                toggleIcon.className += ' toggle';
+            } else {
+                toggleIcon.className = 'menuIcon';
+            }
+        });
+
+//https://codepen.io/ev3lym/pen/geaGem
+
+</script>
+
+
+</body>
+
+</html>
