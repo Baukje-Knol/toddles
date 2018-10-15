@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Login</title>
+    <script type="text/javascript" src="/js/validate.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/login.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- https://codepen.io/adam2326/pen/VYMOdx -->
+    <!-- https://codepen.io/erlenmasson/pen/azVZXQ -->
+    <!-- https://codepen.io/geertjanhendriks/pen/nztgv -->
+</head>
+
+<body>
+    <section id="nav">
+        <%- include('loginheader'); -%>
+    </section>
+    <section class="loginform">
+        <% if (loginFailed) { %>
+        <h1 id="loginFailed">Oops! Please try again :)</h1>
+        <% } %>
+            
+        <h1>Login</h1>
+        <br>
+
+        <div id="input_errors"></div>
+
+        <form id="loginform" name="login" action="/login" method="POST" autocomplete="off">
+
+            <p>My
+            <label for="email">email address</label> is
+            <input type='email' name='email' id="email" placeholder='(your email address)' /> and</p>
+
+            <p>my 
+            <label for="password">password</label> is
+            <input type='password' name='password' id="password" placeholder='(your password)' />
+            <br>
+            <br>
+
+            <input type="submit" value="logIn">
+        </form>
+        <br>
+
+        <p>Don't have an account?</p>
+        <br>
+
+        <section id="register">
+            <form action="/register">
+                <input type="submit" value="Register" />
+            </form>
+        </section>
+        <br>
+    </section>
+        <%- include('footer'); -%>
+
+    <script type="text/javascript">
+        var validator = new FormValidator('login',
+            [
+                {
+                    name: 'email',
+                    rules: 'required|valid_email'
+                }, {
+                    name: 'password',
+                    rules: 'required|min_length[8]'
+                }
+            ],
+            function (errors, event) {
+                if (errors.length > 0) {
+                    event.preventDefault()
+
+                    var errorString = '';
+                    for (var i = 0; i < errors.length; i++) {
+                        var error = errors[i]
+                        for (var j = 0; j < error.messages.length; j++) {
+                            errorString += error.messages[j] + '<br />';
+                        }
+                    }
+                    $("#input_errors").html(errorString);
+                }
+            });
+
+    </script>
+
+</body>
+
+</html>
