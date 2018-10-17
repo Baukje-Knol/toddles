@@ -1,4 +1,6 @@
+//Requiring packages
 const express = require('express')
+const fs = require('fs');
 const app = express()
 const Sequelize = require('sequelize');
 const bodyParser = require('body-parser');
@@ -17,13 +19,11 @@ const sequelize = new Sequelize(process.env.TODDLES, process.env.POSTGRES_USER, 
     storage: './session.postgres'
 })
 
-app.set('views', './src/views')
+app.set('views', '/src/views')
 app.set('view engine', 'ejs')
-
 app.use(express.static('public'))
 
 app.use(bodyParser.urlencoded({ extended: true }))
-
 app.use(session({
     store: new SequelizeStore({
         db: sequelize,//values are passed from const sequelize
@@ -73,11 +73,52 @@ const User = sequelize.define('users', {
 
     })
 
-//Route Home & Login
-app.get('/', (req, res) => {
-    res.render('home')
+
+// Home route --> /
+app.get('/', (request, response) => {
+    response.render('home')
 })
 
+//Free books route --> /freebooks
+app.get('/freebooks', (request, response) => {
+    response.render('freebooks')
+})
+
+
+//All books route --> /books
+app.get('/books', (request, response) => {
+    response.render('allbooks')
+})
+
+//Specific books route --> /book/:name
+app.get('/book/:name', (request, response) => {
+
+    var name = request.params.name
+    fs.readFile('./book_links.json', function (err, data) {
+        if (err) {
+            throw err;
+        }
+        var parsed = JSON.parse(data);
+        for (let i = 0; i < parsed.length; i++) {
+            if (name.toLowerCase() === parsed[i].title.toLowerCase()) {
+                link = parsed[i].link
+                response.render('specificbook', {
+                    link: link
+                })
+            }
+        }
+    })
+
+})
+
+//Route to check subscription in the header link of specificbook page
+
+app.post('/specbookheader', (request, response) => {
+    var subscription = request.session.user.subscription
+    response.send(subscription);
+})
+
+//Login route --> /login
 app.get('/login', (req, res) => {
     var user = req.session.user
     res.render('login', { loginFailed: false })
@@ -125,6 +166,7 @@ app.get('/register', (req, res) => {
     res.render('register', { registerFailed: false });
 })
 
+// email validation
 app.post('/validation', (req, res) => {
     var email = req.body.email
     User.findOne({
@@ -144,6 +186,7 @@ app.post('/validation', (req, res) => {
         })
 })
 
+//Route -/register
 app.post('/register', (req, res) => {
     var inputname = req.body.name
     var inputemail = req.body.email
