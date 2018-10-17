@@ -1,3 +1,4 @@
+
 //Requiring packages
 const express = require('express')
 const fs = require('fs');
@@ -78,46 +79,6 @@ const User = sequelize.define('users', {
 app.get('/', (request, response) => {
     response.render('home')
 })
-
-//Free books route --> /freebooks
-app.get('/freebooks', (request, response) => {
-    response.render('freebooks')
-})
-
-
-//All books route --> /books
-app.get('/books', (request, response) => {
-    response.render('allbooks')
-})
-
-//Specific books route --> /book/:name
-app.get('/book/:name', (request, response) => {
-
-    var name = request.params.name
-    fs.readFile('./book_links.json', function (err, data) {
-        if (err) {
-            throw err;
-        }
-        var parsed = JSON.parse(data);
-        for (let i = 0; i < parsed.length; i++) {
-            if (name.toLowerCase() === parsed[i].title.toLowerCase()) {
-                link = parsed[i].link
-                response.render('specificbook', {
-                    link: link
-                })
-            }
-        }
-    })
-
-})
-
-//Route to check subscription in the header link of specificbook page
-
-app.post('/specbookheader', (request, response) => {
-    var subscription = request.session.user.subscription
-    response.send(subscription);
-})
-
 //Login route --> /login
 app.get('/login', (req, res) => {
     var user = req.session.user
@@ -224,6 +185,136 @@ app.post('/register', (req, res) => {
         })
     }
 })
+//Free books route --> /freebooks
+app.get('/freebooks', (request, response) => {
+    response.render('freebooks')
+})
+
+
+//All books route --> /books
+app.get('/books', (request, response) => {
+    response.render('allbooks')
+})
+
+//Specific books route --> /book/:name
+app.get('/book/:name', (request, response) => {
+
+    var name = request.params.name
+    fs.readFile('./book_links.json', function (err, data) {
+        if (err) {
+            throw err;
+        }
+        var parsed = JSON.parse(data);
+        for (let i = 0; i < parsed.length; i++) {
+            if (name.toLowerCase() === parsed[i].title.toLowerCase()) {
+                link = parsed[i].link
+                response.render('specificbook', {
+                    link: link
+                })
+            }
+        }
+    })
+
+})
+
+//Route to check subscription in the header link of specificbook page
+
+app.post('/specbookheader', (request, response) => {
+    var subscription = request.session.user.subscription
+    response.send(subscription);
+})
+
+
+//subscription
+app.get('/subscription', (request, response) => {
+  response.render('subscription')
+})
+app.post('/subscription', (request, response) => {
+   user = request.session.user.id
+  User.update({
+      subscription: true,
+      owner: request.body.owner,
+      cvv: request.body.cvv,
+      cardnumber: request.body.cardnumber,
+      expiration: request.body.expiration,
+    }, {
+      returning: true,
+      where: {
+        id:id
+      }
+    })
+    .then(user => {
+      response.redirect('/books')
+    })
+})
+
+
+//routing
+app.get('/routing', (request, response) => {
+  user=request.session.user
+ 
+  User.findOne({
+      where: {
+        id: user
+      }
+    })
+    .then(user => {
+      if (user.subscription == true) {
+        response.redirect('/books')
+      } else(response.redirect('/freebooks'))
+    })
+})
+
+//Settings
+app.get('/settings', (request, response) => {
+   user=request.session.user
+ 
+  User.findOne({
+      where: {
+        id: user
+      }
+    })
+    .then(user => {
+      let name = user.name
+      let subscription = user.subscription
+      if (user.subscription == true) {
+        let link = "Cancel Subscription";
+        response.render('settings', {
+          name: name,
+          subscription: subscription,
+          link: link
+        })
+      } else {
+        let link = "Subscribe now";
+        response.render('settings', {
+          subscription: subscription,
+          name: name,
+          link: link
+        })
+      }
+    })
+})
+app.post('/settings', (request, response) => {
+    user=request.session.user
+    if (user.subscription == true) {
+      User.update({
+          subscription: false
+        }, {
+          where: {
+            id: user.id
+          }
+        })
+        .then(() => {
+          response.redirect('/settings')
+        })
+    } else{response.redirect('/subscription')}
+})
+
+//about
+app.get('/about', (request, response)=>{
+response.render('about')
+})
+
 
 //Route - Log out
 app.get('/logout', (req, res) => {

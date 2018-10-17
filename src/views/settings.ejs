@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Settings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/settings.css" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Capriola" rel="stylesheet">
+
+</head>
+
+<body>
+  <section id="nav">
+    <nav id="navbar" class="">
+      <div class="nav-wrapper">
+        <div class="logo">
+          <a href="/home"><img id="logoimg" src="./images/logo.png"></a>
+        </div>
+
+        <ul id="menu">
+          <li><a href="/routing"id="books">Books</a></li>
+          <li><a href="/logout">Log Out</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="menuIcon">
+      <span class="icon icon-bars"></span>
+      <span class="icon icon-bars overlay"></span>
+    </div>
+
+  </section>
+  <section id="bigbox">
+
+    <div class="container">
+      <h2 class="title">Account Settings</h2>
+      <table>
+        <div class="unit">Account Name:
+          <%= name %>
+      </br>
+          <% if (subscription== true) { %>
+          <p>Account Status: subscribed</p>
+          <% }    %>
+          <% if (subscription== false) { %>
+          <p> Account Status: not subscribed </p>
+          <% } %><br>
+          <form action="/settings" method="POST">
+            <button class="button"><%= link %></button></form>
+        </div>
+      </table>
+      </div>
+  </section>
+
+  <section id="footer">
+    <%- include('footer'); -%>
+  </section>
+  <script type="text/javascript">
+    // Navigation
+    // Responsive Toggle Navigation =============================================
+    let menuIcon = document.querySelector('.menuIcon');
+    let nav = document.querySelector('.overlay-menu');
+
+    menuIcon.addEventListener('click', () => {
+      if (nav.style.transform != 'translateX(0%)') {
+        nav.style.transform = 'translateX(0%)';
+        nav.style.transition = 'transform 0.2s ease-out';
+      } else {
+        nav.style.transform = 'translateX(-100%)';
+        nav.style.transition = 'transform 0.2s ease-out';
+      }
+    });
+
+    $('#books').on('click', (event) => {
+      console.log(user.subscription)
+      if (user.subscription == true) {
+        res.redirect('/books')
+      } else(res.redirect('/freebooks'))
+    })
+    onclick('#books')
+  </script>
+
+</body>
+
+</html>
