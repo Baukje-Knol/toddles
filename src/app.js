@@ -87,7 +87,7 @@ app.post('/login', (req, res) => {
     var email = req.body.email
     var password = req.body.password
 
-    //input validation
+    // input validation
     if (password == null || password.length < 8 ||
         email == null || email.length == 0) {
         res.render('login', { loginFailed: true })
@@ -125,6 +125,25 @@ app.get('/register', (req, res) => {
     res.render('register', { registerFailed: false });
 })
 
+app.post('/validation', (req, res) => {
+    var email = req.body.email
+    User.findOne({
+            where: {
+                email: email
+            }
+        })
+        .then(user => {
+            if (user === null) {
+                res.send(true)
+            } else {
+                res.send(false)
+            }
+        }).catch((err) => {
+            console.log(err, err.stack)
+            res.render('register', { registerFailed: true })
+        })
+})
+
 app.post('/register', (req, res) => {
     var inputname = req.body.name
     var inputemail = req.body.email
@@ -149,14 +168,15 @@ app.post('/register', (req, res) => {
                 email: inputemail,
                 subscription: false,
                 password: hash
-            }).then((user) => {
-                req.session.user = user;
+            }).then(() => {
+                id = req.session.user.id;
+                subscription = req.session.user.subscription;
                 res.redirect('/freebooks')
 
             })
                 .catch((err) => {
                     console.error(err)
-                    // res.render('register', { registerFailed: true })
+                    res.render('register', { registerFailed: true })
                 })
         })
     }

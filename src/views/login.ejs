@@ -17,37 +17,40 @@
         <%- include('loginheader'); -%>
     </section>
     <section class="loginform">
-        <% if (loginFailed) { %>
-        <h1 id="loginFailed">Oops! Please try again :)</h1>
-        <% } %>
             
         <h1>Login</h1>
         <br>
 
-        <div id="input_errors"></div>
+        <% if (loginFailed) { %>
+            <h1 id="loginFailed">Oops! Please try again :)</h1>
+            <% } %>
 
         <form id="loginform" name="login" action="/login" method="POST" autocomplete="off">
 
-            <p>My
-            <label for="email">email address</label> is
-            <input type='email' name='email' id="email" placeholder='(your email address)' /> and</p>
-
-            <p>my 
-            <label for="password">password</label> is
-            <input type='password' name='password' id="password" placeholder='(your password)' />
+            <div>
+                My
+                <label for="email">email address</label> is
+                <input type='email' name='email' id="email-field" placeholder='(your email address)' /> and
+                <p class="field-error" id="emailvalidation"></p>
+            </div>
+            
+            <div>
+                my 
+                <label for="password">password</label> is
+                <input type='password' name='password' id="password-field" placeholder='(your password)' />
+                <p class="field-error" id="passwordvalidation"></p>
+            </div>
             <br>
-            <br>
 
-            <input type="submit" value="logIn">
+            <input id="loginbutton" type="submit" value="Login">
         </form>
         <br>
 
         <p>Don't have an account?</p>
-        <br>
-
+       
         <section id="register">
             <form action="/register">
-                <input type="submit" value="Register" />
+                <input id="registerbutton" type="submit" value="Register" />
             </form>
         </section>
         <br>
@@ -65,18 +68,16 @@
                     rules: 'required|min_length[8]'
                 }
             ],
-            function (errors, event) {
+            function errorMessage(errors, event) {
                 if (errors.length > 0) {
                     event.preventDefault()
+                    $(".field-error").empty()
 
-                    var errorString = '';
                     for (var i = 0; i < errors.length; i++) {
+                        console.log(`Error ${i}: ${JSON.stringify(errors[i], null, 2)}`)
                         var error = errors[i]
-                        for (var j = 0; j < error.messages.length; j++) {
-                            errorString += error.messages[j] + '<br />';
-                        }
+                        $(`#${error.id}`).next().html(error.message)
                     }
-                    $("#input_errors").html(errorString);
                 }
             });
 

@@ -16,55 +16,57 @@
     </section>
 
     <section class="registerform">
-        <% if (registerFailed) { %>
-        <header>Oops! Please try again :)</header>
-        <% } %>
-
-        <h1>Register</h1>
-        <br>
 
         <div id="form">
+            <h1>Register</h1>
+            <br>
+
+            <% if (registerFailed) { %>
+            <h2>Oops! Please try again :)</h2>
+            <% } %>
+
             <div class="fish" id="fish"></div>
             <div class="fish" id="fish2"></div>
-
-            <div id="input_errors"></div>
 
             <form id="registerform" name="register" action="/register" method="POST" autocomplete="off">
                 <div class="formgroup" id="name-form">
                     <label for="name">Name</label>
-                    <input type='text' name='name' placeholder='Enter your name' />
+                    <input id="name-field" type='text' name='name' placeholder='Enter your name' />
+                    <p class="field-error"></p>
                 </div>
-                
+
                 <div class="formgroup" id="email-form">
                     <label for="email">Email</label>
-                    <input type='email' name='email' placeholder='Enter your email' />
+                    <input id="email-field" type='email' name='email' placeholder='Enter your email' />
+                    <p class="field-error" id="emailvalidation"></p>
                 </div>
-                
+
                 <div class="formgroup" id="password-form">
                     <label for="password">Password</label>
-                    <input type='password' name='password' placeholder='Enter your password' />
+                    <input id="password-field" type='password' name='password' placeholder='Enter your password - Min. 8 characters' />
+                    <p class="field-error"></p>
                 </div>
-                
-                <p id="password_alert">* Your password must contain at least 8 characters long</p>
-               
+
                 <div class="formgroup" id="confirmpassword-form">
                     <label for="password">Confirm Password</label>
-                    <input type='password' name='confirmpassword' placeholder='Enter your password again' />
+                    <input id="confirm-password-field" type='password' name='confirmpassword' placeholder='Enter your password again' />
+                    <p class="field-error"></p>
                 </div>
-                
-                <input type="submit" value="Create Account">
+
+                <input class="createbutton" type="submit" value="Create Account">
             </form>
-        </div>
-       
-        <p>Already have an account?</p>
-        <form action="/login">
+            
+            <p id="login">Already have an account?</p>
+
+        <form class="loginbutton" action="/login">
             <input type="submit" value="LogIn" />
         </form>
-    </section>
-    <section id="footer">
-        <%- include('footer'); -%>
-    </section>
+        </section>
+        </div>
 
+    <div>
+        <%- include('footer'); -%>
+    </div>
 
     <script type="text/javascript">
         var validator = new FormValidator('register',
@@ -85,20 +87,35 @@
                     rules: 'required|matches[password]'
                 }
             ],
-            function (errors, event) {
+            function errorMessage(errors, event) {
                 if (errors.length > 0) {
                     event.preventDefault()
-
+                    $(".field-error").empty()
                     var errorString = '';
                     for (var i = 0; i < errors.length; i++) {
+                        console.log(`Error ${i}: ${JSON.stringify(errors[i], null, 2)}`)
                         var error = errors[i]
-                        for (var j = 0; j < error.messages.length; j++) {
-                            errorString += error.messages[j] + '<br />';
-                        }
+                        $(`#${error.id}`).next().html(error.message)
                     }
-                    $("#input_errors").html(errorString);
                 }
             });
+
+        $('#email-field').on('input', (event) => {
+            var email = $("#email-field").val().toLowerCase()
+            if (email.length != 0) {
+                $.post('/validation', {
+                    email: email
+                }, (response) => {
+                    if (response) {
+                        $('#emailvalidation').empty();
+                    } else {
+                        $('#emailvalidation').text('Please pick another username!');
+                    }
+                })
+            } else {
+                $('#emailvalidation').empty();
+            }
+        })
 
     </script>
 </body>

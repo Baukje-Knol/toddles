@@ -4,12 +4,12 @@
 body, html{
 	height: 100%;
 	padding: 0;
-	margin: 0;
 	font-family: 'Sniglet', cursive;
+
 }
 h1{
 	font-weight: normal;
-	font-size: 4em;
+	font-size: 50px;
 	font-family: 'Raleway', sans-serif;
 	margin: 0 auto;
 	margin-top: 30px;
@@ -51,6 +51,7 @@ h1{
 
 #fish{
 	top: 120px;
+	
 }
 
 #fish2{
@@ -67,7 +68,8 @@ header{
 
 #form{
 	height: 100%;	
-	background-color: #98d4f3;
+	width: 100%;
+	background-color: #1485CC;
 	overflow: hidden;
 	position: relative;
 	
@@ -75,11 +77,10 @@ header{
 form{
 	margin: 0 auto;
 	width: 500px;
-	padding-top: 40px;
+	padding-top: 0px;
 	color: white;
 	position: relative;
-	
-	
+	border-radius: 10px;
 }
 label, input {
 	display: block;	
@@ -87,7 +88,7 @@ label, input {
 input {
 	width: 500px;	
 	border: none;
-	border-radius: 20px;
+	border-radius: 10px;
 	outline: none;
 	padding: 10px;
 	font-family: 'Sniglet', cursive;
@@ -108,9 +109,12 @@ input[type="submit"]{
 	background-color: #F90;
 	color: white;
 	height: 50px;
+	width:150px;
+	text-align:center;
 	cursor: pointer;
-	margin-top: 30px;
-	font-size: 1.29em;
+	margin-top:30px;
+	margin-bottom: 30px;
+	font-size: 1.1em;
 	font-family: 'Sniglet', cursive;
 	-webkit-transition: background-color 0.5s;
 	-moz-transition: background-color 0.5s;
@@ -119,8 +123,9 @@ input[type="submit"]{
 }
 input[type="submit"]:hover{
 	background-color: #e58f0e;
-	
+
 }
+
 label{
 	font-size: 1.5em;
 	margin-top: 20px;
@@ -144,11 +149,17 @@ label{
 }
 
 .registerform {
-    text-align: center;
+	text-align: center;
+	margin-left: 10%;
+	margin-right: 10%;
 }
 
-#password_alert {
-    color: blue;
-    font-size: 13px;
-    font-style: italic;
+.field-error {
+	color: red;
+	font-size: 13px;
+}
+
+#login {
+	color: white;
+	font-size: 1em;
 }
