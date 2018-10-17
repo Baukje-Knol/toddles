@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Free Books</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/freebooks.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <section id="nav">
+        <%- include('headerfreebooks'); -%>
+    </section>
+
+    <section id="agebooksection">
+
+
+        <section class="agegroup" id="age1">
+            <div class='divtitle'>
+                <p>Ages 1 - 3</p>
+            </div>
+            <div class="book">
+                <a href="/book/toast"><img src="./images/thumbnails/1-3/toast.png" id="freebook"></a>
+                <img src="./images/thumbnails/1-3/Ann-Nem-Oh-Nee thumbnails.png">
+                <img src="./images/thumbnails/1-3/Tumi-goes-o-the-park thumbnails.png">
+                <img src="./images/thumbnails/1-3/That’s not Thabi thumbnails.png">
+                <img src="./images/thumbnails/1-3/Zandi and Birdy Monster thumbnails.png">
+                <img src="./images/thumbnails/1-3/whereislulu.png">
+                <img src="./images/thumbnails/1-3/keepernakita.png">
+            </div>
+        </section>
+
+        <section class="agegroup" id="age2">
+            <div class='divtitle'>
+                <p>Ages 4 - 6</p>
+            </div>
+            <div class="book">
+                <a href="/book/thelostlaugh"><img src="./images/thumbnails/4-6/thelostlaugh.png" id="freebook"></a>
+                <img src="./images/thumbnails/4-6/thepumpkinchase.png">
+                <img src="./images/thumbnails/4-6/aryainthecockpit.png">
+                <img src="./images/thumbnails/4-6/bhabhloo thumbnail.png">
+                <img src="./images/thumbnails/4-6/circles.png">
+                <img src="./images/thumbnails/4-6/thesnailcarpenter.png">
+                <img src="./images/thumbnails/4-6/thelostegg.png">
+                <img src="./images/thumbnails/4-6/afishandagift.png">
+                <img src="./images/thumbnails/4-6/thefishandchip.png">
+            </div>
+        </section>
+
+        <section class="agegroup" id="age3">
+            <div class='divtitle'>
+                <p>Ages 7 - 9</p>
+            </div>
+            <div class="book">
+                <a href="/book/annasextraexpweather"><img src="./images/thumbnails/7-9/annasextraexpweather.PNG" id="freebook"></a>
+                <img src="./images/thumbnails/7-9/codingiseverywhere.PNG">
+                <img src="./images/thumbnails/7-9/letsgoseedcollecting.PNG">
+                <img src="./images/thumbnails/7-9/limejuice.PNG">
+                <img src="./images/thumbnails/7-9/myinsideweather.PNG">
+                <img src="./images/thumbnails/7-9/themagicblock.PNG">
+                <img src="./images/thumbnails/7-9/themagicmango.PNG">
+            </div>
+        </section>
+
+
+    </section>
+
+    <section id="formore">
+        <p>For more books, please <a href="/subscription">subscribe!</a></p>
+    </section>
+
+
+    <section id="footer">
+        <%- include('footer'); -%>
+    </section>
+</body>
+
+</html>
