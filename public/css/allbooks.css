@@ -1,0 +1,87 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+/* For devices less than 1500px */
+.book img {
+    height: 8vh;
+    width: 6.5vw ;
+    border-radius: 10px;
+    padding:0px;
+}
+
+
+.book {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+}
+
+#age1 {
+    background-color: #FFFC19;
+    background-image: linear-gradient(#FFFC19, rgb(255, 253, 115));
+    min-height: 20vh;
+    border-radius: 10px;
+}
+
+#age2 {
+    background-color: rgb(255, 0, 0);
+    background-image: linear-gradient(rgb(255, 0, 0), rgb(255, 78, 78));
+    min-height: 20vh;
+    border-radius: 10px;
+}
+
+#age3 {
+    background-color: #1485CC;
+    background-image: linear-gradient(#1485CC, rgb(40, 171, 252));
+    min-height: 20vh;
+    border-radius: 10px;
+}
+
+.divtitle {
+    font-family: 'Capriola', sans-serif;
+    font-size: 30px;
+    padding-left: 15vw;
+}
+
+#agebooksection {
+    margin-right: 10vw;
+    margin-left: 10vw;
+}
+
+/* For devices 1500px and larger: */
+@media only screen and (min-device-width: 1500px) {
+    #agebooksection {
+        margin-right: 10vw;
+        margin-left: 10vw;
+    }
+    .book img {
+        height: 12vh;
+        width: 6vw;
+        border-radius: 10px;
+    }
+    #age1 {
+        background-color: #FFFC19;
+        background-image: linear-gradient(#FFFC19, rgb(255, 253, 115));
+        min-height: 27vh;
+        border-radius: 10px;
+    }
+    
+    #age2 {
+        background-color: rgb(255, 0, 0);
+        background-image: linear-gradient(rgb(255, 0, 0), rgb(255, 78, 78));
+        min-height: 27vh;
+        border-radius: 10px;
+    }
+    
+    #age3 {
+        background-color: #1485CC;
+        background-image: linear-gradient(#1485CC, rgb(40, 171, 252));
+        min-height: 27vh;
+        border-radius: 10px;
+    }
+}
+
+
+

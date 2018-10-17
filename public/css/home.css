@@ -1,17 +1,21 @@
 body {
     margin: 0px;
     padding: 0px;
-    background-color: rgb(253, 208, 123);
-    background-image: linear-gradient(rgb(247, 191, 89), rgb(255, 236, 128));
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color:white;
     min-height: 100vh;
     min-width: 100ch;
 }
 
-img {
-    height: 100px;
-    width: 100px;
+#backgroundimg{
+    background-image: url('../images/night.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+#bigbox img {
+    height: 150px;
+    width: 150px;
 }
 
 #bigbox {
@@ -31,13 +35,14 @@ img {
 .book {
     float: left;
     width: 33.33%;
-    padding: 20px;
+    padding: 15px;
 }
 
 #aboutproduct {
-    padding: 20px;
+    padding-left: 17%;
     font-family: 'Capriola', sans-serif;
     font-size: 30px;
+    color:rgb(252, 124, 65);
 }
 
 #register {
