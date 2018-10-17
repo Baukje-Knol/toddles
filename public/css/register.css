@@ -4,13 +4,13 @@
 body, html{
 	height: 100%;
 	padding: 0;
-	font-family: 'Sniglet', cursive;
+  font-family: 'Merriweather Sans', sans-serif;
 
 }
 h1{
 	font-weight: normal;
 	font-size: 50px;
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Capriola', sans-serif;
 	margin: 0 auto;
 	margin-top: 30px;
 	width: 500px;
@@ -40,7 +40,7 @@ h1{
 	width: 235px;
 	height: 104px;
 	margin-left: -235px;
-	position: absolute;	
+	position: absolute;
 	animation: myfirst 24s;
 	-webkit-animation: myfirst 24s;
 	animation-iteration-count: infinite;
@@ -51,7 +51,7 @@ h1{
 
 #fish{
 	top: 120px;
-	
+
 }
 
 #fish2{
@@ -67,12 +67,12 @@ header{
 }
 
 #form{
-	height: 100%;	
+	height: 100%;
 	width: 100%;
 	background-color: #1485CC;
 	overflow: hidden;
 	position: relative;
-	
+
 }
 form{
 	margin: 0 auto;
@@ -83,10 +83,10 @@ form{
 	border-radius: 10px;
 }
 label, input {
-	display: block;	
+	display: block;
 }
 input {
-	width: 500px;	
+	width: 500px;
 	border: none;
 	border-radius: 10px;
 	outline: none;
@@ -98,13 +98,15 @@ input {
 	-webkit-transition: border 0.5s;
 	-moz-transition: border 0.5s;
 	-o-transition: border 0.5s;
-	border: solid 3px #98d4f3;	
+	border: solid 3px #98d4f3;
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	box-sizing:border-box;
-	
-}
 
+}
+.buttons{
+padding-left: 15vw
+}
 input[type="submit"]{
 	background-color: #F90;
 	color: white;
@@ -144,7 +146,7 @@ label{
 }
 
 .formgroup{
-	background-image: url('http://www.geertjanhendriks.nl/codepen/form/pixel.gif');	
+	background-image: url('http://www.geertjanhendriks.nl/codepen/form/pixel.gif');
 	text-align: left;
 }
 

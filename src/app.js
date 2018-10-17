@@ -1,4 +1,3 @@
-
 //Requiring packages
 const express = require('express')
 const fs = require('fs');
@@ -20,7 +19,7 @@ const sequelize = new Sequelize(process.env.TODDLES, process.env.POSTGRES_USER, 
     storage: './session.postgres'
 })
 
-app.set('views', '/src/views')
+app.set('views', './src/views')
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
@@ -107,7 +106,7 @@ app.post('/login', (req, res) => {
                 if (result) {
                     req.session.user = user;
                     if (user.subscription == true) {
-                        res.redirect('/allbooks')
+                        res.redirect('/books')
                     } else {
                         res.redirect('/freebooks')
                     }
@@ -217,20 +216,12 @@ app.get('/book/:name', (request, response) => {
 
 })
 
-//Route to check subscription in the header link of specificbook page
-
-app.post('/specbookheader', (request, response) => {
-    var subscription = request.session.user.subscription
-    response.send(subscription);
-})
-
-
 //subscription
 app.get('/subscription', (request, response) => {
   response.render('subscription')
 })
 app.post('/subscription', (request, response) => {
-   user = request.session.user.id
+   user = request.session.user
   User.update({
       subscription: true,
       owner: request.body.owner,
@@ -240,7 +231,7 @@ app.post('/subscription', (request, response) => {
     }, {
       returning: true,
       where: {
-        id:id
+        id: user.id
       }
     })
     .then(user => {
@@ -252,10 +243,10 @@ app.post('/subscription', (request, response) => {
 //routing
 app.get('/routing', (request, response) => {
   user=request.session.user
- 
+
   User.findOne({
       where: {
-        id: user
+        id: user.id
       }
     })
     .then(user => {
@@ -268,10 +259,10 @@ app.get('/routing', (request, response) => {
 //Settings
 app.get('/settings', (request, response) => {
    user=request.session.user
- 
+
   User.findOne({
       where: {
-        id: user
+        id: user.id
       }
     })
     .then(user => {
