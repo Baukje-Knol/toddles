@@ -85,6 +85,7 @@ app.post('/subscription', (request, response) => {
     })
 })
 
+
 //routing
 app.get('/routing', (request, response) => {
   // user=request.session.user
@@ -130,13 +131,10 @@ app.get('/settings', (request, response) => {
       }
     })
 })
-app.post('/settings', (req, res) => {
-  // $('.button').on('click', (event) => {
-    // let user = req.session.user.id;
+app.post('/settings', (request, response) => {
     let id =1
     let subscription=false
     if (subscription == true) {
-      console.log("--------------" +id)
       User.update({
           subscription: false
         }, {
@@ -145,11 +143,16 @@ app.post('/settings', (req, res) => {
           }
         })
         .then(() => {
-          res.redirect('/settings')
+          response.redirect('/settings')
         })
-    } else{res.redirect('/subscription')}
-  // })
+    } else{response.redirect('/subscription')}
 })
+
+//about
+app.get('/about', (request, response)=>{
+response.render('about')
+})
+
 
 sequelize.sync({
   force: false
