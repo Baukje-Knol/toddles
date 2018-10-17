@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Register</title>
+    <%- include('includes'); -%>
+    <script type="text/javascript" src="/js/validate.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/register.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <section id="nav">
+        <%- include('header'); -%>
+    </section>
+
+    <section class="registerform">
+
+        <div id="form">
+            <h1>Register</h1>
+            <br>
+
+            <% if (registerFailed) { %>
+            <h2>Oops! Please try again :)</h2>
+            <% } %>
+
+            <div class="fish" id="fish"></div>
+            <div class="fish" id="fish2"></div>
+
+            <form id="registerform" name="register" action="/register" method="POST" autocomplete="off">
+                <div class="formgroup" id="name-form">
+                    <label for="name">Name</label>
+                    <input id="name-field" type='text' name='name' placeholder='Enter your name' />
+                    <p class="field-error"></p>
+                </div>
+
+                <div class="formgroup" id="email-form">
+                    <label for="email">Email</label>
+                    <input id="email-field" type='email' name='email' placeholder='Enter your email' />
+                    <p class="field-error" id="emailvalidation"></p>
+                </div>
+
+                <div class="formgroup" id="password-form">
+                    <label for="password">Password</label>
+                    <input id="password-field" type='password' name='password' placeholder='Enter your password - Min. 8 characters' />
+                    <p class="field-error"></p>
+                </div>
+
+                <div class="formgroup" id="confirmpassword-form">
+                    <label for="password">Confirm Password</label>
+                    <input id="confirm-password-field" type='password' name='confirmpassword' placeholder='Enter your password again' />
+                    <p class="field-error"></p>
+                </div>
+
+                <input class="createbutton" type="submit" value="Create Account">
+            </form>
+            
+            <p id="login">Already have an account?</p>
+
+        <form class="loginbutton" action="/login">
+            <input type="submit" value="LogIn" />
+        </form>
+        </section>
+        </div>
+
+    <div>
+        <%- include('footer'); -%>
+    </div>
+
+    <script type="text/javascript">
+        var validator = new FormValidator('register',
+            [
+                {
+                    name: 'name',
+                    display: 'username',
+                    rules: 'required|alpha_numeric'
+                }, {
+                    name: 'email',
+                    rules: 'required|valid_email'
+                }, {
+                    name: 'password',
+                    rules: 'required|min_length[8]'
+                }, {
+                    name: 'confirmpassword',
+                    display: 'password confirmation',
+                    rules: 'required|matches[password]'
+                }
+            ],
+            function errorMessage(errors, event) {
+                if (errors.length > 0) {
+                    event.preventDefault()
+                    $(".field-error").empty()
+                    var errorString = '';
+                    for (var i = 0; i < errors.length; i++) {
+                        console.log(`Error ${i}: ${JSON.stringify(errors[i], null, 2)}`)
+                        var error = errors[i]
+                        $(`#${error.id}`).next().html(error.message)
+                    }
+                }
+            });
+
+        $('#email-field').on('input', (event) => {
+            var email = $("#email-field").val().toLowerCase()
+            if (email.length != 0) {
+                $.post('/validation', {
+                    email: email
+                }, (response) => {
+                    if (response) {
+                        $('#emailvalidation').empty();
+                    } else {
+                        $('#emailvalidation').text('Please pick another username!');
+                    }
+                })
+            } else {
+                $('#emailvalidation').empty();
+            }
+        })
+
+    </script>
+</body>
+
+</html>
