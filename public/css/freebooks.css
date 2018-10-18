@@ -3,56 +3,30 @@
     margin: 0px;
 }
 
-#freebook{
+#freebook {
     opacity: 1;
 }
 
-/* For devices less than 1500px */
-.book img {
-    height: 8vh;
-    width: 6.5vw ;
-    border-radius: 10px;
-    opacity: 0.5;
-}
-
-#formore{
-    text-align: center;
-    font-size: 30px;
-    padding-bottom:5vh;
-    padding-top:5vh;
-}
-
-.book {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 15px;
-}
 
 #age1 {
     background-color: #FFFC19;
     background-image: linear-gradient(#FFFC19, rgb(255, 253, 115));
-    min-height: 20vh;
+    min-height: 27vh;
     border-radius: 10px;
 }
 
 #age2 {
     background-color: rgb(255, 0, 0);
     background-image: linear-gradient(rgb(255, 0, 0), rgb(255, 78, 78));
-    min-height: 20vh;
+    min-height: 27vh;
     border-radius: 10px;
 }
 
 #age3 {
     background-color: #1485CC;
     background-image: linear-gradient(#1485CC, rgb(40, 171, 252));
-    min-height: 20vh;
+    min-height: 27vh;
     border-radius: 10px;
-}
-
-.divtitle {
-    font-family: 'Capriola', sans-serif;
-    font-size: 30px;
-    padding-left: 15vw;
 }
 
 #agebooksection {
@@ -60,44 +34,67 @@
     margin-left: 10vw;
 }
 
-/* For devices 1500px and larger: */
-@media only screen and (min-device-width: 1500px) {
-    #agebooksection {
-        margin-right: 10vw;
-        margin-left: 10vw;
-    }
+
+/* For portrait orientation: */
+@media screen and (orientation:portrait) {
     .book img {
-        height: 12vh;
-        width: 6vw;
+        height: 8vh;
+        width: 8vh;
+        border-radius: 10px;
+        margin: 1vh;
         opacity: 0.5;
-        border-radius: 10px;
     }
-    #age1 {
-        background-color: #FFFC19;
-        background-image: linear-gradient(#FFFC19, rgb(255, 253, 115));
-        min-height: 27vh;
-        border-radius: 10px;
+
+    .book {
+        display: flex;
+        margin-top: 3vw;
+        flex-wrap: wrap;
+        justify-content: center;
     }
-    
-    #age2 {
-        background-color: rgb(255, 0, 0);
-        background-image: linear-gradient(rgb(255, 0, 0), rgb(255, 78, 78));
-        min-height: 27vh;
-        border-radius: 10px;
+
+    .divtitle {
+        font-family: 'Capriola', sans-serif;
+        font-size: 3vh;
+        padding-left: 15vw;
     }
-    
-    #age3 {
-        background-color: #1485CC;
-        background-image: linear-gradient(#1485CC, rgb(40, 171, 252));
-        min-height: 27vh;
-        border-radius: 10px;
-    }
-    #formore{
+
+    #formore {
         text-align: center;
-        font-size: 30px;
-        padding-top:0px;
-        padding-bottom:2vh;
+        font-size: 2vh;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
     }
+
 }
 
+/* For landscape orietation: */
+@media screen and (orientation:landscape) {
+    .book img {
+        height: 10vw;
+        width: 10vw;
+        border-radius: 10px;
+        margin: 1vw;
+        opacity: 0.5;
+    }
 
+    .divtitle {
+        font-family: 'Capriola', sans-serif;
+        font-size: 3vw;
+        padding-left: 15vw;
+    }
+
+    .book {
+        display: flex;
+        margin-top: 3vh;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #formore {
+        text-align: center;
+        font-size: 2vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+    }
+
+}

@@ -14,7 +14,7 @@
    background: white;
    color: rgb(13, 26, 38);
    top: 0;
-   height: 60px;
+   height: 8vh;
    line-height: 60px;
    width: 100vw;
    z-index: 10;
@@ -41,17 +41,8 @@
 
  .logo {
    float: left;
-   margin-left: 28px;
-   font-size: 1.5em;
-   height: 60px;
-   letter-spacing: 1px;
-   text-transform: uppercase;
- }
-
- @media(max-width: 768px) {
-   .logo {
-     /*       margin-left: 5px; */
-   }
+   margin-left: 10px;
+   height: 7vh;
  }
 
  #navbar ul {
@@ -65,16 +56,17 @@
    -webkit-transition: transform 0.5s ease-out;
  }
 
- @media(max-width: 640px) {
-   #navbar ul {
-     display: none;
-   }
- }
-
  @media(orientation: landscape) {
    #navbar ul {
      display: inline-block;
    }
+ }
+
+ @media screen and (max-width:1300px){
+  #logoimg {
+    width: 20vw;
+    display: flex;
+  }
  }
 
  #navbar li {
@@ -84,10 +76,9 @@
  #navbar li a {
    color: rgb(13, 26, 38);
    display: block;
-   font-size: 0.7em;
+   font-size: 2vh;
    height: 50px;
    letter-spacing: 1px;
-   margin: 0 20px;
    padding: 0 4px;
    position: relative;
    text-decoration: none;
@@ -138,12 +129,11 @@
  }
 
  #logoimg {
-   height: 80%;
+   height: 90%;
    display: flex;
-   padding-top: 10px;
  }
 
  #menu li{
-   font-size: 24px;
+   font-size: 2vh;
    font-weight: bold;
  }
