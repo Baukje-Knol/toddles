@@ -23,10 +23,12 @@ app.set('views', './src/views')
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
 app.use(session({
     store: new SequelizeStore({
-        db: sequelize,//values are passed from const sequelize
+        db: sequelize, //values are passed from const sequelize
         checkExpirationInterval: 15 * 60 * 1000,
         expiration: 24 * 60 * 60 * 1000
     }),
@@ -69,19 +71,23 @@ const User = sequelize.define('users', {
         type: Sequelize.STRING
     }
 }, {
-        timestamp: false
+    timestamp: false
 
-    })
+})
 
 
 // Home route --> /
 app.get('/', (request, response) => {
     response.render('home')
 })
+
+
 //Login route --> /login
 app.get('/login', (req, res) => {
     var user = req.session.user
-    res.render('login', { loginFailed: false })
+    res.render('login', {
+        loginFailed: false
+    })
 })
 
 app.post('/login', (req, res) => {
@@ -91,7 +97,9 @@ app.post('/login', (req, res) => {
     // input validation
     if (password == null || password.length < 8 ||
         email == null || email.length == 0) {
-        res.render('login', { loginFailed: true })
+        res.render('login', {
+            loginFailed: true
+        })
         return;
     }
 
@@ -111,7 +119,9 @@ app.post('/login', (req, res) => {
                         res.redirect('/freebooks')
                     }
                 } else {
-                    res.redirect('/login', { loginFailed: true });
+                    res.redirect('/login', {
+                        loginFailed: true
+                    });
                 }
             });
 
@@ -123,7 +133,9 @@ app.post('/login', (req, res) => {
 
 //Route - Register
 app.get('/register', (req, res) => {
-    res.render('register', { registerFailed: false });
+    res.render('register', {
+        registerFailed: false
+    });
 })
 
 // email validation
@@ -142,7 +154,9 @@ app.post('/validation', (req, res) => {
             }
         }).catch((err) => {
             console.log(err, err.stack)
-            res.render('register', { registerFailed: true })
+            res.render('register', {
+                registerFailed: true
+            })
         })
 })
 
@@ -162,11 +176,14 @@ app.post('/register', (req, res) => {
         inputemail == null ||
         regex.test(inputemail) == false
     ) {
-        res.render('register', { registerFailed: true })
+        res.render('register', {
+            registerFailed: true
+        })
     } else {
 
         bcrypt.hash(inputpassword, saltRounds).then(hash => {
             User.create({
+
                 name: inputname,
                 email: inputemail,
                 subscription: false,
@@ -181,10 +198,12 @@ app.post('/register', (req, res) => {
                 req.session.user.subscription = subscription
                 res.redirect('/freebooks')
 
-            })
+                })
                 .catch((err) => {
                     console.error(err)
-                    res.render('register', { registerFailed: true })
+                    res.render('register', {
+                        registerFailed: true
+                    })
                 })
         })
     }
@@ -224,74 +243,75 @@ app.get('/book/:name', (request, response) => {
 
 //subscription
 app.get('/subscription', (request, response) => {
-  response.render('subscription')
+    response.render('subscription')
 })
 app.post('/subscription', (request, response) => {
-   user = request.session.user
-  User.update({
-      subscription: true,
-      owner: request.body.owner,
-      cvv: request.body.cvv,
-      cardnumber: request.body.cardnumber,
-      expiration: request.body.expiration,
-    }, {
-      returning: true,
-      where: {
-        id: user.id
-      }
-    })
-    .then(user => {
-      response.redirect('/books')
-    })
+    user = request.session.user
+    User.update({
+            subscription: true,
+            owner: request.body.owner,
+            cvv: request.body.cvv,
+            cardnumber: request.body.cardnumber,
+            expiration: request.body.expiration,
+        }, {
+            returning: true,
+            where: {
+                id: user.id
+            }
+        })
+        .then(user => {
+            response.redirect('/books')
+        })
 })
 
 
 //routing
 app.get('/routing', (request, response) => {
-  user=request.session.user
+    user = request.session.user
 
-  User.findOne({
-      where: {
-        id: user.id
-      }
-    })
-    .then(user => {
-      if (user.subscription == true) {
-        response.redirect('/books')
-      } else(response.redirect('/freebooks'))
-    })
+    User.findOne({
+            where: {
+                id: user.id
+            }
+        })
+        .then(user => {
+            if (user.subscription == true) {
+                response.redirect('/books')
+            } else(response.redirect('/freebooks'))
+        })
 })
 
 //Settings
 app.get('/settings', (request, response) => {
-   user=request.session.user
+    user = request.session.user
 
-  User.findOne({
-      where: {
-        id: user.id
-      }
-    })
-    .then(user => {
-      let name = user.name
-      let subscription = user.subscription
-      if (user.subscription == true) {
-        let link = "Cancel Subscription";
-        response.render('settings', {
-          name: name,
-          subscription: subscription,
-          link: link
+    User.findOne({
+            where: {
+                id: user.id
+            }
         })
-      } else {
-        let link = "Subscribe now";
-        response.render('settings', {
-          subscription: subscription,
-          name: name,
-          link: link
+        .then(user => {
+            let name = user.name
+            let subscription = user.subscription
+            if (user.subscription == true) {
+                let link = "Cancel Subscription";
+                response.render('settings', {
+                    name: name,
+                    subscription: subscription,
+                    link: link
+                })
+            } else {
+                let link = "Subscribe now";
+                response.render('settings', {
+                    subscription: subscription,
+                    name: name,
+                    link: link
+                })
+            }
         })
-      }
-    })
 })
 app.post('/settings', (request, response) => {
+
     user=request.session.user
     console.log("----------------"+user.subscription)
     if (user.subscription === true) {
@@ -307,11 +327,12 @@ app.post('/settings', (request, response) => {
           response.redirect('/settings')
         })
     } else{response.redirect('/subscription')}
+
 })
 
 //about
-app.get('/about', (request, response)=>{
-response.render('about')
+app.get('/about', (request, response) => {
+    response.render('about')
 })
 
 

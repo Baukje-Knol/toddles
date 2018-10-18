@@ -1,8 +1,10 @@
-body{
-    padding:0px;
-    margin:0px;
+body {
+    padding: 0px;
+    margin: 0px;
 }
 
-#book-container{
-    text-align: center; 
+#book-container {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }

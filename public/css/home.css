@@ -2,8 +2,8 @@ body {
     margin: 0px;
     padding: 0px;
     background-color:white;
-    min-height: 100vh;
-    min-width: 100ch;
+    min-height: 100%;
+    min-width: 100%;
 }
 
 #backgroundimg{
@@ -13,48 +13,87 @@ body {
     background-size:cover;
 }
 
-#bigbox img {
-    height: 150px;
-    width: 150px;
-}
-
 #bigbox {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    min-width: 100%;
     height: 65vh;
 }
 
-#bookcovers {
-    display: flex;
-    flex-direction: row;
+
+
+
+@media screen and (orientation:landscape) {
+    #bigbox img {
+        height: 10vw;
+        width: 10vw;
+        border-radius: 10px;
+    }
+
+    .book {
+        float: right;
+        padding-left: 1vw;
+    }
+    #bookcovers {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding-right: 2vw;
+    }
+
+    #aboutproduct {
+        padding-left: 25vw;
+        font-family: 'Capriola', sans-serif;
+        font-size: 2vw;
+        color:rgb(252, 124, 65);
+        min-width: 25vw;
+    }
+    #register {
+        text-align: center;
+        padding-top: 3vw;
+        padding-bottom: 3vw;
+    }
+    
+    #register input{
+        font-size: 2vw;
+        background-color: transparent;
+        color:rgb(252, 124, 65);
+        border: none;
+        font-weight: bold;
+        text-decoration: underline;
+    }
 }
 
-.book {
-    float: left;
-    width: 33.33%;
-    padding: 15px;
-}
+@media screen and (orientation:portrait) {
+    #bigbox img {
+        height: 10vh;
+        width: 10vh;
+    }
 
-#aboutproduct {
-    padding-left: 19%;
-    font-family: 'Capriola', sans-serif;
-    font-size: 30px;
-    color:rgb(252, 124, 65);
-}
+    .book {
+        float: left;
+        width: 33.33%;
+        padding: 15px;
+    }
 
-#register {
-    text-align: center;
-    padding: 50px;
-}
-
-#register input{
-    font-size: 30px;
-    background-color: transparent;
-    color:rgb(252, 124, 65);
-    border: none;
-    font-weight: bold;
-    text-decoration: underline;
+    #aboutproduct {
+        padding-left: 19%;
+        font-family: 'Capriola', sans-serif;
+        font-size: 3vh;
+        color:rgb(252, 124, 65);
+    }
+    #register {
+        text-align: center;
+        padding: 50px;
+    }
+    
+    #register input{
+        font-size: 30px;
+        background-color: transparent;
+        color:rgb(252, 124, 65);
+        border: none;
+        font-weight: bold;
+        text-decoration: underline;
+    }
 }
