@@ -171,9 +171,14 @@ app.post('/register', (req, res) => {
                 email: inputemail,
                 subscription: false,
                 password: hash
-            }).then(() => {
-                id = req.session.user.id;
-                subscription = req.session.user.subscription;
+            }).then((user) => {
+                console.log(user)
+                console.log(req.session)
+                var id = user.id; 
+                req.session.user = {};
+                var subscription = user.subscription;
+                req.session.user.id = id
+                req.session.user.subscription = subscription
                 res.redirect('/freebooks')
 
             })
@@ -186,6 +191,7 @@ app.post('/register', (req, res) => {
 })
 //Free books route --> /freebooks
 app.get('/freebooks', (request, response) => {
+    console.log(request.session.user)
     response.render('freebooks')
 })
 
