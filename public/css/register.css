@@ -105,7 +105,21 @@ input {
 
 }
 .buttons{
-padding-left: 15vw
+padding-left: 15vw;
+background-color: #F90;
+color: white;
+height: 50px;
+width:150px;
+text-align:center;
+cursor: pointer;
+margin-top:30px;
+margin-bottom: 30px;
+font-size: 1.1em;
+font-family: 'Sniglet', cursive;
+-webkit-transition: background-color 0.5s;
+-moz-transition: background-color 0.5s;
+-o-transition: background-color 0.5s;
+transition: background-color 0.5s;
 }
 input[type="submit"]{
 	background-color: #F90;

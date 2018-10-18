@@ -1,54 +1,10 @@
-/* Animation webkit */
-@-webkit-keyframes myfirst
-{
-	0% {margin-left: -235px}
-	90% {margin-left: 100%;}
-	100% {margin-left: 100%;}
-}
-
-/* Animation */
-@keyframes myfirst
-{
-	0% {margin-left: -235px}
-	70% {margin-left: 100%;}
-	100% {margin-left: 100%;}
-}
-
-.fish{
-	background-image: url('http://www.geertjanhendriks.nl/codepen/form/fish.png');
-	width: 235px;
-	height: 104px;
-	margin-left: 10%;
-  margin-right: 10%;
-  z-index: 99;
-	position: absolute;
-	animation: myfirst 24s;
-	-webkit-animation: myfirst 24s;
-	animation-iteration-count: infinite;
-	-webkit-animation-iteration-count: infinite;
-	animation-timing-function: linear;
-	-webkit-animation-timing-function: linear;
-}
-
-#fish{
-	top: 120px;
-
-}
-
-#fish2{
-	top: 260px;
-	animation-delay: 12s;
-	-webkit-animation-delay: 12s;
-}
-
 #bigbox {
   background: #1485CC;
-  background-position: left;
   font-family: Arial;
   height:620px;
   margin-left: 10%;
   margin-right: 10%;
-  padding-top:25px
+  padding-top:25px;
 }
 #price {
   height: 80px;
@@ -60,33 +16,32 @@
   text-align: center;
   font-size: 30px;
   font-family: 'Merriweather Sans', sans-serif;
+	overflow: hidden;
+	position: relative;
+
 }
 .container {
-  background: white;
-  bottom: 0;
   border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  height: 400px;
-  left: 0;
+  height:80%;
   margin: auto;
-  top: 0;
-  right: 0;
-  width: 60%;
+  width: 90%;
+	border: solid;
+
 }
 .back{
   background-color: rgb(230,94,46);
   border: none;
   color: white;
   cursor: pointer;
-  margin: 15px 0 0 25px;
-  padding: 15px 32px;
-  margin-top: 50px;
+  margin-top: 18%;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
   border-radius: 10px;
-
-  width: 50%;}
+  width: 30%;
+	overflow: hidden;
+	position: relative;
+}
 
 table {
   margin: 0 auto;
@@ -95,11 +50,10 @@ table {
 .input {
   text-align: center;
   border-radius: 10px;
-
 }
 
 input {
-    padding: 12px 40px;
+    padding: 15px 40px;
     margin: 10px 0;
     display: inline-block;
     border-radius: 10px;
@@ -109,7 +63,6 @@ input {
 label {
   font-size: 14px;
   font-family: 'Merriweather Sans', sans-serif;
-
 }
 
 input::-webkit-input-placeholder {
@@ -117,25 +70,17 @@ input::-webkit-input-placeholder {
     line-height: 1;
 }
 
-.cnumber, .cname {
-  width: 90%;
-  margin-right: 1em;
-}
-
-.scode {
-  width: 50%;
-}
-
 .title {
-  background-color: rgb(230,94,46); /* Green */
   color: white;
   padding: 12px;
   border-radius: 10px;
+	overflow: hidden;
+	position: relative;
 
 }
 
 .button {
-    background-color: rgb(230,94,46); /* Green */
+    background-color: rgb(230,94,46);
     border: none;
     color: white;
     cursor: pointer;
@@ -146,6 +91,7 @@ input::-webkit-input-placeholder {
     font-size: 20px;
     width: 50%;
     border-radius: 10px;
+
 }
 
 .button:hover {
@@ -167,7 +113,6 @@ a {
  height: 60px;
  line-height: 60px;
  width: 100vw;
- z-index: 10;
 }
 
 .nav-wrapper {
