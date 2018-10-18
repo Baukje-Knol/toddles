@@ -183,14 +183,20 @@ app.post('/register', (req, res) => {
 
         bcrypt.hash(inputpassword, saltRounds).then(hash => {
             User.create({
-                    name: inputname,
-                    email: inputemail,
-                    subscription: false,
-                    password: hash
-                }).then(() => {
-                    id = req.session.user.id;
-                    subscription = req.session.user.subscription;
-                    res.redirect('/freebooks')
+
+                name: inputname,
+                email: inputemail,
+                subscription: false,
+                password: hash
+            }).then((user) => {
+                console.log(user)
+                console.log(req.session)
+                var id = user.id; 
+                req.session.user = {};
+                var subscription = user.subscription;
+                req.session.user.id = id
+                req.session.user.subscription = subscription
+                res.redirect('/freebooks')
 
                 })
                 .catch((err) => {
@@ -204,6 +210,7 @@ app.post('/register', (req, res) => {
 })
 //Free books route --> /freebooks
 app.get('/freebooks', (request, response) => {
+    console.log(request.session.user)
     response.render('freebooks')
 })
 
@@ -304,21 +311,23 @@ app.get('/settings', (request, response) => {
         })
 })
 app.post('/settings', (request, response) => {
-    user = request.session.user
-    if (user.subscription == true) {
-        User.update({
-                subscription: false
-            }, {
-                where: {
-                    id: user.id
-                }
-            })
-            .then(() => {
-                response.redirect('/settings')
-            })
-    } else {
-        response.redirect('/subscription')
-    }
+
+    user=request.session.user
+    console.log("----------------"+user.subscription)
+    if (user.subscription === true) {
+      User.update({
+          subscription: false
+        }, {
+          where: {
+            id: user.id
+          }
+        })
+        .then(() => {
+          request.session.user.subscription=false;
+          response.redirect('/settings')
+        })
+    } else{response.redirect('/subscription')}
+
 })
 
 //about

@@ -19,7 +19,6 @@
 
     <div id="form">
       <h1>Register</h1>
-      <br>
 
       <% if (registerFailed) { %>
       <h2>Oops! Please try again :)</h2>
@@ -28,7 +27,7 @@
       <div class="fish" id="fish"></div>
       <div class="fish" id="fish2"></div>
 
-      <form id="registerform" name="register" action="/register" method="POST" autocomplete="off">
+      <form name="register" action="/register" method="POST" autocomplete="off">
         <div class="formgroup" id="name-form">
           <label for="name">Name</label>
           <input id="name-field" type='text' name='name' placeholder='Enter your name' />
@@ -53,15 +52,17 @@
           <p class="field-error"></p>
         </div>
 
-        <div class="buttons">
+        <div>
           <input class="createbutton" type="submit" value="Create Account">
+        </div>
+      </form>
 
-               </form>
       <p id="login">Already have an account?</p>
-      <a href="/login">
-            <input type="submit" value="LogIn" />
-          </a>
+      <br>
+      <a class="loginbutton" href="/login">LogIn</a>
+
     </div>
+
   </section>
   </div>
 
@@ -107,9 +108,10 @@
         }, (response) => {
           if (response) {
             $('#emailvalidation').empty();
+            $(".createbutton").attr("disabled", false);
           } else {
-            event.preventDefault()
             $('#emailvalidation').text('Please pick another username!');
+            $(".createbutton").attr("disabled", true);
           }
         })
       } else {
