@@ -16,68 +16,66 @@
 
   <section id="nav">
     <nav id="navbar" class="">
-        <div class="nav-wrapper">
-            <div class="logo">
-                <a href="/"><img id="logoimg" src="./images/logo.png"></a>
-            </div>
-
-            <ul id="menu">
-              <li><a href="/settings">Settings</a></li>
-                <li><a href="/logout">Log Out</a></li>
-            </ul>
+      <div class="nav-wrapper">
+        <div class="logo">
+          <a href="/"><img id="logoimg" src="./images/logo.png"></a>
         </div>
+
+        <ul id="menu">
+          <li><a href="/settings">Settings</a></li>
+          <li><a href="/logout">Log Out</a></li>
+        </ul>
+      </div>
     </nav>
     <div class="menuIcon">
-        <span class="icon icon-bars"></span>
-        <span class="icon icon-bars overlay"></span>
+      <span class="icon icon-bars"></span>
+      <span class="icon icon-bars overlay"></span>
     </div>
 
   </section>
-  <div class="wrapper">
-  <div class="container">
-  <section id="bigbox">
+  <section id="wrapper">
+    <div class="container">
+      <h1>Get all books for €4.99 / month. </h1>
+      <section id="form">
+        <form action="/subscription" method="POST" autocomplete="off">
+          <div class="container2">
+            <h2 class="title">Credit Card Information</h2>
+            <table>
+              <tr>
+                <td>
+                  <label >Card Number</label><br/>
+                  <input type="text" id="cardnumber" minlength="16"maxlength="16" class="cnumber" name="cardnumber" required placeholder="****************">
 
-    <section id="price">
-      <p>Get all books for €4.99 / month. </br>
-    </section>
-    <section id="form">
-          <form action="/subscription" method="POST" autocomplete="off">
-            <div class="container">
-              <h2 class="title">Credit Card Information</h2>
-              <table>
-                <tr>
-                  <td>
-                    <label >Card Number</label><br/>
-                    <input type="text" id="cardnumber" minlength="16"maxlength="16" class="cnumber" name="cardnumber" required placeholder="****************">
                   </td>
-                  <td>
-                    <label >CVV</label><br/>
-                    <input type="text" id="cvv" maxlength="4" minlength="3" required name="cvv" class="scode" placeholder="****">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label >Name on card</label><br/>
-                    <input type="text" class="name" id="owner" required name="owner" placeholder="Will Smith">
-                  </td>
-                  <td>
-                    <label >Expiration date</label><br/>
-                    <input type="text" id="expiration" pattern="(0[1-9]|1[012])/[0-9]{2}" class="expieration" value="" required="" name="expiration" placeholder="MM/YY">
-                  </td>
-                </tr>
-              </table>
-                <button class="button">Submit</button>
+                <td>
+                  <label >CVV</label><br/>
+                  <input type="text" id="cvv" maxlength="4" minlength="3" required name="cvv" class="scode" placeholder="****">
 
-            </div>
-          </form>
-    </section>
-      </form>
-      <section id="back">
-        <button type="button" class="back" href="/freebooks"> <--- Go back to free books</button>
+                  </td>
+              </tr>
+              <tr>
+                <td>
+                  <label >Name on card</label><br/>
+                  <input type="text" class="name" id="owner" required name="owner" placeholder="Will Smith">
+
+                  </td>
+                <td>
+                  <label >Expiration date</label><br/>
+                  <input type="text" id="expiration" pattern="(0[1-9]|1[012])/[0-9]{2}" class="expieration" value="" required="" name="expiration" placeholder="MM/YY">
+
+                  </td>
+              </tr>
+            </table>
+            <button class="button">Submit</button>
+
+          </div>
+        </form>
       </section>
-    </section>
+      <section id="back">
+        <button type="button" class="back" href="/freebooks"> < --- Go back to free books</button>
+      </section>
 
-    <ul class="bg-bubbles">
+      <ul class="bg-bubbles">
         <li></li>
         <li></li>
         <li></li>
@@ -89,41 +87,40 @@
         <li></li>
         <li></li>
       </ul>
-    </div>   
+    </div>
+  </section>
 
-    <section id="footer">
-      <%- include('footer'); -%>
-    </section>
-    <script type="text/javascript">
+  <section id="footer">
+    <p>© 2018 Geniue</p>
+  </section>
+  <script type="text/javascript">
+    // Navigation
+    // Responsive Toggle Navigation =============================================
+    let menuIcon = document.querySelector('.menuIcon');
+    let nav = document.querySelector('.overlay-menu');
 
-        // Navigation
-            // Responsive Toggle Navigation =============================================
-            let menuIcon = document.querySelector('.menuIcon');
-            let nav = document.querySelector('.overlay-menu');
-
-            menuIcon.addEventListener('click', () => {
-                if (nav.style.transform != 'translateX(0%)') {
-                    nav.style.transform = 'translateX(0%)';
-                    nav.style.transition = 'transform 0.2s ease-out';
-                } else {
-                    nav.style.transform = 'translateX(-100%)';
-                    nav.style.transition = 'transform 0.2s ease-out';
-                }
-            });
+    menuIcon.addEventListener('click', () => {
+      if (nav.style.transform != 'translateX(0%)') {
+        nav.style.transform = 'translateX(0%)';
+        nav.style.transition = 'transform 0.2s ease-out';
+      } else {
+        nav.style.transform = 'translateX(-100%)';
+        nav.style.transition = 'transform 0.2s ease-out';
+      }
+    });
 
 
-            // Toggle Menu Icon ========================================
-            let toggleIcon = document.querySelector('.menuIcon');
+    // Toggle Menu Icon ========================================
+    let toggleIcon = document.querySelector('.menuIcon');
 
-            toggleIcon.addEventListener('click', () => {
-                if (toggleIcon.className != 'menuIcon toggle') {
-                    toggleIcon.className += ' toggle';
-                } else {
-                    toggleIcon.className = 'menuIcon';
-                }
-            });
-
-    </script>
+    toggleIcon.addEventListener('click', () => {
+      if (toggleIcon.className != 'menuIcon toggle') {
+        toggleIcon.className += ' toggle';
+      } else {
+        toggleIcon.className = 'menuIcon';
+      }
+    });
+  </script>
 
 </body>
 

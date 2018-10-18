@@ -28,7 +28,7 @@
    width: 60%;
    height: 60%;
    margin: 10% auto;
-   background: linear-gradient(270deg, #00ffea, #00ffea);
+   background: linear-gradient(270deg, #FFFC19, #FFFC19);
 background-size: 400% 400%;
 }
 
@@ -52,8 +52,8 @@ background-size: 400% 400%;
   margin:auto;
 }
 .button{
-    background-color: rgb(230,94,46); /* Green */
-    border: none;
+  background: #1485CC;
+border: none;
     color: white;
     cursor: pointer;
     margin: 15px 0 0 25px;

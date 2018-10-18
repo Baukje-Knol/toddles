@@ -287,7 +287,8 @@ app.get('/settings', (request, response) => {
 })
 app.post('/settings', (request, response) => {
     user=request.session.user
-    if (user.subscription == true) {
+    console.log("----------------"+user.subscription)
+    if (user.subscription === true) {
       User.update({
           subscription: false
         }, {
@@ -296,6 +297,7 @@ app.post('/settings', (request, response) => {
           }
         })
         .then(() => {
+          request.session.user.subscription=false;
           response.redirect('/settings')
         })
     } else{response.redirect('/subscription')}
