@@ -16,72 +16,91 @@
     <section id="nav">
         <%- include('loginheader'); -%>
     </section>
+
     <section class="loginform">
-            
-        <h1>Login</h1>
-        <br>
 
-        <% if (loginFailed) { %>
-            <h1 id="loginFailed">Oops! Please try again :)</h1>
+        <div id="form">
+
+            <% if (loginFailed) { %>
+            <h2>Oops! Please try again :)</h2>
             <% } %>
+            <div class="owl">
+                    <div class="hand"></div>
+                    <div class="hand hand-r"></div>
+                    <div class="arms">
+                      <div class="arm"></div>
+                      <div class="arm arm-r"></div>
+                    </div>
+                  </div>
+                  <div class="form">
+                    <div class="control">
+                      <label for="email" class="fa fa-envelope"></label>
+                      <input id="email" placeholder="Email" type="email"></input>
+                  </div>
+                  <div class="control">
+                    <label for="password" class="fa fa-asterisk"></label>
+                    <input id="password" placeholder="Password" type="password"></input>
+                  </div>
+                  </div>
+                  
+            <h1>Login</h1>
+           
 
-        <form id="loginform" name="login" action="/login" method="POST" autocomplete="off">
+            <form class="loginform" name="login" action="/login" method="POST" autocomplete="off">
+                <div>
+                    My
+                    <label for="email">email address</label> is
+                    <input id="email-field" type='email' name='email' placeholder='(your email address)' /> and
+                    <p class="field-error"></p>
+                </div>
 
-            <div>
-                My
-                <label for="email">email address</label> is
-                <input type='email' name='email' id="email-field" placeholder='(your email address)' /> and
-                <p class="field-error" id="emailvalidation"></p>
-            </div>
-            
-            <div>
-                my 
-                <label for="password">password</label> is
-                <input type='password' name='password' id="password-field" placeholder='(your password)' />
-                <p class="field-error" id="passwordvalidation"></p>
-            </div>
-            <br>
+                <div>
+                    my
+                    <label for="password">password</label> is
+                    <input id="password-field" type='password' name='password' placeholder='(your password)' />
+                    <p class="field-error"></p>
+                </div>
 
-            <input id="loginbutton" type="submit" value="Login">
-        </form>
-        <br>
-
-        <p>Don't have an account?</p>
-       
-        <section id="register">
-            <form action="/register">
-                <input id="registerbutton" type="submit" value="Register" />
+                <input id="loginbutton" type="submit" value="Login">
             </form>
-        </section>
-        <br>
+
+            <p id="text">Don't have an account?</p>
+            <br>
+            <a class="registerbutton" href="/register">Register</a>
+
+            </div>
+        </div>
     </section>
-        <%- include('footer'); -%>
 
-    <script type="text/javascript">
-        var validator = new FormValidator('login',
-            [
-                {
-                    name: 'email',
-                    rules: 'required|valid_email'
-                }, {
-                    name: 'password',
-                    rules: 'required|min_length[8]'
-                }
-            ],
-            function errorMessage(errors, event) {
-                if (errors.length > 0) {
-                    event.preventDefault()
-                    $(".field-error").empty()
+            <div>
+                <%- include('footer'); -%>
+            </div>
 
-                    for (var i = 0; i < errors.length; i++) {
-                        console.log(`Error ${i}: ${JSON.stringify(errors[i], null, 2)}`)
-                        var error = errors[i]
-                        $(`#${error.id}`).next().html(error.message)
-                    }
-                }
-            });
+            <script type="text/javascript">
+                var validator = new FormValidator('login',
+                    [
+                        {
+                            name: 'email',
+                            rules: 'required|valid_email'
+                        }, {
+                            name: 'password',
+                            rules: 'required|min_length[8]'
+                        }
+                    ],
+                    function errorMessage(errors, event) {
+                        if (errors.length > 0) {
+                            event.preventDefault()
+                            $(".field-error").empty()
 
-    </script>
+                            for (var i = 0; i < errors.length; i++) {
+                                console.log(`Error ${i}: ${JSON.stringify(errors[i], null, 2)}`)
+                                var error = errors[i]
+                                $(`#${error.id}`).next().html(error.message)
+                            }
+                        }
+                    });
+
+            </script>
 
 </body>
 
