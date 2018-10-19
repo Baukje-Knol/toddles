@@ -147,9 +147,6 @@ form input:focus {
 }
 
 .back{
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
   outline:0;
   background-color: white;
   border: 0;
@@ -166,12 +163,16 @@ form input:focus {
   -webkit-transition-duration: 0.25s;
           transition-duration: 0.25s;
 }
+a{
+  text-decoration: none;
+  color: #1485CC;
+
+}
 .back:hover {
   background-color: rgba(255, 255, 255, 0.4);
 }
 
 .bg-bubbles {
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
