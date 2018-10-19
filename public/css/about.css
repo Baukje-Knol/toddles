@@ -1,12 +1,13 @@
 #bigbox {
-  background: #1485CC;
-  font-family: Arial;
-  height:620px;
+  background-image: url('/images/background6.png');
+  background-position: center center;
+  height:80%;
   margin-left: 10%;
   margin-right: 10%;
-  padding-top:25px;
+  padding-top:0.5%;
   font-size: 20px;
   font-family: 'Merriweather Sans', sans-serif;
+  color: rgb(56,56,55);
 }
 .us{
 direction: ltr;
@@ -19,11 +20,46 @@ text-align: center;
 .column{
   display:table-cell;
 }
+
+@media screen and (orientation: landscape) {
 .circle{
-  border-radius:200px;
-  height:200px;
-  width: 200px;
+  border-radius:50%;
+  /* height:20vw; */
+  width: 20vw;
+  border: solid 0.5vw white;
 }
+h2 {
+  font-family: 'Capriola', sans-serif;
+  font-size: 4vw;
+}
+.github {
+  width: 10vh;
+ }
+ 
+ .linkedin {
+   width: 5vh;
+ }
+}
+
+@media screen and (orientation: portrait) {
+  .circle{
+    border-radius:50%;
+    border: solid 0.5vh white;
+    width: 20vh;
+  }
+  h2 {
+    font-family: 'Capriola', sans-serif;
+    font-size: 4vh;
+  }
+  .github {
+    width: 10vw;
+   }
+   
+   .linkedin {
+     width: 5vw;
+   }
+  }
+
 #footer {
     text-align: center;
     bottom: 0;
