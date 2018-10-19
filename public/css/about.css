@@ -39,6 +39,12 @@ h2 {
  .linkedin {
    width: 5vh;
  }
+ p {
+    font-size: 1.3vw;
+}
+h3 {
+  font-size: 2vw;
+}
 }
 
 @media screen and (orientation: portrait) {
@@ -58,8 +64,15 @@ h2 {
    .linkedin {
      width: 5vw;
    }
+   p {
+    font-size: 1.3vh;
+  }
+  h3 {
+    font-size: 2vh;
+  }
   }
 
+ 
 #footer {
     text-align: center;
     bottom: 0;
