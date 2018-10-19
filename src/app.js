@@ -171,6 +171,7 @@ app.post('/register', (req, res) => {
 
         bcrypt.hash(inputpassword, saltRounds).then(hash => {
             User.create({
+
                 name: inputname,
                 email: inputemail,
                 subscription: false,
@@ -185,6 +186,7 @@ app.post('/register', (req, res) => {
                 req.session.user.subscription = subscription
                 res.redirect('/freebooks')
 
+
             })
                 .catch((err) => {
                     console.error(err)
@@ -196,34 +198,49 @@ app.post('/register', (req, res) => {
 //Free books route --> /freebooks
 app.get('/freebooks', (request, response) => {
     console.log(request.session.user)
-    response.render('freebooks')
+    let user = request.session.user
+    if (user == null || user == undefined) {
+        response.redirect('/');
+    } else {
+        response.render('freebooks');
+    }
 })
 
 
 //All books route --> /books
 app.get('/books', (request, response) => {
-    response.render('allbooks')
+    console.log(request.session.user)
+    let user = request.session.user
+    if (user.subscription === false) {
+        response.redirect('/');
+    } else {
+        response.render('allbooks');
+    }
 })
 
 //Specific books route --> /book/:name
 app.get('/book/:name', (request, response) => {
-
-    var name = request.params.name
-    fs.readFile('./book_links.json', function (err, data) {
-        if (err) {
-            throw err;
-        }
-        var parsed = JSON.parse(data);
-        for (let i = 0; i < parsed.length; i++) {
-            if (name.toLowerCase() === parsed[i].title.toLowerCase()) {
-                link = parsed[i].link
-                response.render('specificbook', {
-                    link: link
-                })
+    console.log(request.session.user)
+    let user = request.session.user
+    if (user.subscription === false) {
+        response.redirect('/freebooks');
+    } else {
+        var name = request.params.name
+        fs.readFile('./book_links.json', function (err, data) {
+            if (err) {
+                throw err;
             }
-        }
-    })
-
+            var parsed = JSON.parse(data);
+            for (let i = 0; i < parsed.length; i++) {
+                if (name.toLowerCase() === parsed[i].title.toLowerCase()) {
+                    link = parsed[i].link
+                    response.render('specificbook', {
+                        link: link
+                    })
+                }
+            }
+        })
+    }
 })
 
 //subscription
@@ -296,19 +313,27 @@ app.get('/settings', (request, response) => {
         })
 })
 app.post('/settings', (request, response) => {
+
     user = request.session.user
     if (user.subscription == true) {
         User.update({
             subscription: false
         }, {
+
                 where: {
                     id: user.id
                 }
             })
             .then(() => {
+
+                request.session.user.subscription = false;
                 response.redirect('/settings')
             })
-    } else { response.redirect('/subscription') }
+    } else {
+        response.redirect('/subscription')
+    }
+
+
 })
 
 //about
