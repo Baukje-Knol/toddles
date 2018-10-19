@@ -7,9 +7,7 @@
     <script type="text/javascript" src="/js/validate.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/login.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- https://codepen.io/adam2326/pen/VYMOdx -->
-    <!-- https://codepen.io/erlenmasson/pen/azVZXQ -->
-    <!-- https://codepen.io/geertjanhendriks/pen/nztgv -->
+
 </head>
 
 <body>
@@ -22,31 +20,79 @@
         <div id="form">
 
             <% if (loginFailed) { %>
-            <h2>Oops! Please try again :)</h2>
+            <h2 id="oops">Oops! Please try again :)</h2>
             <% } %>
-            <div class="owl">
-                    <div class="hand"></div>
-                    <div class="hand hand-r"></div>
-                    <div class="arms">
-                      <div class="arm"></div>
-                      <div class="arm arm-r"></div>
-                    </div>
-                  </div>
-                  <div class="form">
-                    <div class="control">
-                      <label for="email" class="fa fa-envelope"></label>
-                      <input id="email" placeholder="Email" type="email"></input>
-                  </div>
-                  <div class="control">
-                    <label for="password" class="fa fa-asterisk"></label>
-                    <input id="password" placeholder="Password" type="password"></input>
-                  </div>
-                  </div>
-                  
-            <h1>Login</h1>
-           
 
-            <form class="loginform" name="login" action="/login" method="POST" autocomplete="off">
+            <h1>Login</h1>
+            <br>
+            <div class="owl">
+                <div class="hand"></div>
+                <div class="hand hand-r"></div>
+                <div class="arms">
+                    <div class="arm"></div>
+                    <div class="arm arm-r"></div>
+                </div>
+            </div>
+
+            <div class="form">
+                <form class="loginform" name="login" action="/login" method="POST" autocomplete="off">
+                    <div class="control">
+                        <label for="email" class="fa fa-envelope"></label>
+                        <input id="email" name="email" placeholder="Email" type="email">
+                        <p class="field-error"></p>
+                    </div>
+                    <div class="control">
+                        <label for="password" class="fa fa-asterisk"></label>
+                        <input id="password" name="password" placeholder="Password" type="password">
+                        <p class="field-error"></p>
+                        <input id="loginbutton" type="submit" value="Login">
+                    </div>
+                </form>
+                <p id="text">Don't have an account?</p>
+                <br>
+                <a class="registerbutton" href="/register">Register</a>
+            </div>
+
+        </div>
+    </section>
+    </div>
+    <br>
+    <br>
+    <div>
+        <%- include('footer'); -%>
+    </div>
+    <script type="text/javascript">
+        var validator = new FormValidator('login',
+            [
+                {
+                    name: 'email',
+                    rules: 'required|valid_email'
+                }, {
+                    name: 'password',
+                    rules: 'required|min_length[8]'
+                }
+            ],
+            function errorMessage(errors, event) {
+                if (errors.length > 0) {
+                    event.preventDefault()
+                    $(".field-error").empty()
+
+                    for (var i = 0; i < errors.length; i++) {
+                        console.log(`Error ${i}: ${JSON.stringify(errors[i], null, 2)}`)
+                        var error = errors[i]
+                        $(`#${error.id}`).next().html(error.message)
+                    }
+                }
+            });
+
+    </script>
+
+</body>
+
+</html>
+
+
+<!-- <form class="loginform" name="login" action="/login" method="POST" autocomplete="off">
                 <div>
                     My
                     <label for="email">email address</label> is
@@ -74,34 +120,4 @@
 
             <div>
                 <%- include('footer'); -%>
-            </div>
-
-            <script type="text/javascript">
-                var validator = new FormValidator('login',
-                    [
-                        {
-                            name: 'email',
-                            rules: 'required|valid_email'
-                        }, {
-                            name: 'password',
-                            rules: 'required|min_length[8]'
-                        }
-                    ],
-                    function errorMessage(errors, event) {
-                        if (errors.length > 0) {
-                            event.preventDefault()
-                            $(".field-error").empty()
-
-                            for (var i = 0; i < errors.length; i++) {
-                                console.log(`Error ${i}: ${JSON.stringify(errors[i], null, 2)}`)
-                                var error = errors[i]
-                                $(`#${error.id}`).next().html(error.message)
-                            }
-                        }
-                    });
-
-            </script>
-
-</body>
-
-</html>
+            </div> -->

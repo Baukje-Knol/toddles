@@ -2,9 +2,20 @@
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')  ;
 
 body {
-  background-color: #1a8fb4;
+  background-color:white;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
+}
+
+h1 {
+  font-weight: normal;
+	font-size: 50px;
+	font-family: 'Capriola', sans-serif;
+	margin: 0 auto;
+	margin-top: 0px;
+	width: 500px;
+	color:#1485CC;
+	text-align: center;
 }
 
 .owl {
@@ -28,7 +39,7 @@ body {
     
     
   .password {
-    transform translateX(42px) translateY(-15px) scale(0.7);
+    transform: translateX(42px) translateY(-15px) scale(0.7);
   }
      
   .hand-r{
@@ -57,29 +68,19 @@ body {
     top: 40px;
     transition: 0.3s ease-out;
   }
-     
-      
-  .password {
-    transform: translateX(40px) translateY(-40px);
-  }
-     
-
-
+    
 .arm-r {
   left: 158px;
   transform:scaleX(-1);
-}
-    
-.password {
-  transform:translateX(-40px) translateY(-40px) scaleX(-1);
 }
             
 .form{
   margin: auto;
   margin-top: -9px;
   padding: 30px;
-  background-color: white;
-  width: 175px;
+  background-color: rgb(255, 78, 78);
+  width: 350px;
+  border-radius: 10px;
 }
 
     
@@ -92,6 +93,7 @@ body {
 label {
   position: absolute;
   font-size: 16px;
+  font-family: 'Capriola', sans-serif;
   top :11px;
   left: 9px;
   color :rgba(0,0,0,0.3);
@@ -99,8 +101,73 @@ label {
 
 input {
   padding: 9px 6px 9px 30px;
-  border-radius: 4px;
+  border-radius: 10px;
   border: 1px solid #cccccc;
   font-size: 14px;
+  text-align: left;
+  width: 90%;
+  font-family: 'Capriola', sans-serif;
+}
+
+input[type="submit"]{
+  background-color: #1485CC;
+  border: none;
+	color: white;
+	height: 50px;
+	width:120px;
+	text-align:center;
+	cursor: pointer;
+	margin-top:30px;
+	margin-bottom: 30px;
+	margin-left: 32%;
+	font-size: 1.1em;
+	font-family: 'Capriola', sans-serif;
+  transition: background-color 0.5s;
+  padding-right: 8%;
+}
+
+input[type="submit"]:hover{
+	background-color: #98d4f3;
 }
       
+.field-error {
+	color:#1485CC;
+  font-size: 13px;
+  font-family: 'Capriola', sans-serif;
+}
+
+#text {
+  text-align: center;
+  font-family: 'Capriola', sans-serif;
+  font-size: 15px;
+}
+
+.registerbutton {
+	background-color: #1485CC;
+	color: white;
+	height: 50px;
+	width:150px;
+	text-align:center;
+	cursor: pointer;
+	margin-top:40px;
+  margin-bottom: 30px;
+  margin-left:32%;
+	font-size: 1.1em;
+	font-family: 'Capriola', sans-serif;
+	transition: background-color 0.5s;
+	padding-left: 2vw;
+	padding-right: 2vw;
+	border-radius: 10px;
+	padding-top:2vh;
+  padding-bottom: 2vh;
+}
+
+.registerbutton:hover{
+	background-color: #98d4f3;
+}
+
+#oops {
+  color:rgb(255, 78, 78);
+  text-align: center;
+  font-family: 'Capriola', sans-serif;
+}

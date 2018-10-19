@@ -23,12 +23,10 @@ app.set('views', './src/views')
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(session({
     store: new SequelizeStore({
-        db: sequelize, //values are passed from const sequelize
+        db: sequelize,//values are passed from const sequelize
         checkExpirationInterval: 15 * 60 * 1000,
         expiration: 24 * 60 * 60 * 1000
     }),
@@ -71,23 +69,19 @@ const User = sequelize.define('users', {
         type: Sequelize.STRING
     }
 }, {
-    timestamp: false
+        timestamp: false
 
-})
+    })
 
 
 // Home route --> /
 app.get('/', (request, response) => {
     response.render('home')
 })
-
-
 //Login route --> /login
 app.get('/login', (req, res) => {
     var user = req.session.user
-    res.render('login', {
-        loginFailed: false
-    })
+    res.render('login', { loginFailed: false })
 })
 
 app.post('/login', (req, res) => {
@@ -97,9 +91,7 @@ app.post('/login', (req, res) => {
     // input validation
     if (password == null || password.length < 8 ||
         email == null || email.length == 0) {
-        res.render('login', {
-            loginFailed: true
-        })
+        res.render('login', { loginFailed: true })
         return;
     }
 
@@ -109,6 +101,9 @@ app.post('/login', (req, res) => {
             email: email
         }
     }).then((user) => {
+        if (user == null) {
+            res.render('login', { loginFailed: true })
+        } else {
         bcrypt.compare(password, user.password)
             .then((result) => {
                 if (result) {
@@ -119,33 +114,30 @@ app.post('/login', (req, res) => {
                         res.redirect('/freebooks')
                     }
                 } else {
-                    res.redirect('/login', {
-                        loginFailed: true
-                    });
+                    res.redirect('/login', { loginFailed: true });
                 }
             });
+        }
 
     }).catch((err) => {
         console.log(err, err.stack)
-        // res.render('home', { loginFailed: true })
+        res.render('home', { loginFailed: true })
     })
 })
 
 //Route - Register
 app.get('/register', (req, res) => {
-    res.render('register', {
-        registerFailed: false
-    });
+    res.render('register', { registerFailed: false });
 })
 
 // email validation
 app.post('/validation', (req, res) => {
     var email = req.body.email
     User.findOne({
-            where: {
-                email: email
-            }
-        })
+        where: {
+            email: email
+        }
+    })
         .then(user => {
             if (user === null) {
                 res.send(true)
@@ -154,9 +146,7 @@ app.post('/validation', (req, res) => {
             }
         }).catch((err) => {
             console.log(err, err.stack)
-            res.render('register', {
-                registerFailed: true
-            })
+            res.render('register', { registerFailed: true })
         })
 })
 
@@ -176,34 +166,31 @@ app.post('/register', (req, res) => {
         inputemail == null ||
         regex.test(inputemail) == false
     ) {
-        res.render('register', {
-            registerFailed: true
-        })
+        res.render('register', { registerFailed: true })
     } else {
 
         bcrypt.hash(inputpassword, saltRounds).then(hash => {
             User.create({
 
-                    name: inputname,
-                    email: inputemail,
-                    subscription: false,
-                    password: hash
-                }).then((user) => {
-                    console.log(user)
-                    console.log(req.session)
-                    var id = user.id;
-                    req.session.user = {};
-                    var subscription = user.subscription;
-                    req.session.user.id = id
-                    req.session.user.subscription = subscription
-                    res.redirect('/freebooks')
+                name: inputname,
+                email: inputemail,
+                subscription: false,
+                password: hash
+            }).then((user) => {
+                console.log(user)
+                console.log(req.session)
+                var id = user.id;
+                req.session.user = {};
+                var subscription = user.subscription;
+                req.session.user.id = id
+                req.session.user.subscription = subscription
+                res.redirect('/freebooks')
 
-                })
+
+            })
                 .catch((err) => {
                     console.error(err)
-                    res.render('register', {
-                        registerFailed: true
-                    })
+                    res.render('register', { registerFailed: true })
                 })
         })
     }
@@ -263,12 +250,12 @@ app.get('/subscription', (request, response) => {
 app.post('/subscription', (request, response) => {
     user = request.session.user
     User.update({
-            subscription: true,
-            owner: request.body.owner,
-            cvv: request.body.cvv,
-            cardnumber: request.body.cardnumber,
-            expiration: request.body.expiration,
-        }, {
+        subscription: true,
+        owner: request.body.owner,
+        cvv: request.body.cvv,
+        cardnumber: request.body.cardnumber,
+        expiration: request.body.expiration,
+    }, {
             returning: true,
             where: {
                 id: user.id
@@ -285,14 +272,14 @@ app.get('/routing', (request, response) => {
     user = request.session.user
 
     User.findOne({
-            where: {
-                id: user.id
-            }
-        })
+        where: {
+            id: user.id
+        }
+    })
         .then(user => {
             if (user.subscription == true) {
                 response.redirect('/books')
-            } else(response.redirect('/freebooks'))
+            } else (response.redirect('/freebooks'))
         })
 })
 
@@ -301,10 +288,10 @@ app.get('/settings', (request, response) => {
     user = request.session.user
 
     User.findOne({
-            where: {
-                id: user.id
-            }
-        })
+        where: {
+            id: user.id
+        }
+    })
         .then(user => {
             let name = user.name
             let subscription = user.subscription
@@ -328,22 +315,24 @@ app.get('/settings', (request, response) => {
 app.post('/settings', (request, response) => {
 
     user = request.session.user
-    console.log("----------------" + user.subscription)
-    if (user.subscription === true) {
+    if (user.subscription == true) {
         User.update({
-                subscription: false
-            }, {
+            subscription: false
+        }, {
+
                 where: {
                     id: user.id
                 }
             })
             .then(() => {
+
                 request.session.user.subscription = false;
                 response.redirect('/settings')
             })
     } else {
         response.redirect('/subscription')
     }
+
 
 })
 
