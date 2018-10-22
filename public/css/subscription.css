@@ -299,6 +299,7 @@ input::-webkit-input-placeholder {
 
 #navbar {
  background: white;
+ font-family: 'Merriweather Sans', sans-serif;
  color: rgb(13, 26, 38);
  top: 0;
  height: 60px;

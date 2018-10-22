@@ -197,7 +197,6 @@ app.post('/register', (req, res) => {
 })
 //Free books route --> /freebooks
 app.get('/freebooks', (request, response) => {
-    console.log(request.session.user)
     let user = request.session.user
     if (user == null || user == undefined) {
         response.redirect('/');
@@ -209,21 +208,22 @@ app.get('/freebooks', (request, response) => {
 
 //All books route --> /books
 app.get('/books', (request, response) => {
-    console.log(request.session.user)
-    let user = request.session.user
-    if (user.subscription === false) {
+  let user = request.session.user
+  if (user == null || user == undefined) {
+    response.redirect('/')}
+     else { if (user.subscription === false) {
         response.redirect('/');
     } else {
         response.render('allbooks');
-    }
+    }}
 })
 
 //Specific books route --> /book/:name
 app.get('/book/:name', (request, response) => {
     console.log(request.session.user)
     let user = request.session.user
-    if (user.subscription === false) {
-        response.redirect('/freebooks');
+    if (user == null) {
+        response.redirect('/');
     } else {
         var name = request.params.name
         fs.readFile('./book_links.json', function (err, data) {
@@ -262,6 +262,7 @@ app.post('/subscription', (request, response) => {
             }
         })
         .then(user => {
+          request.session.user.subscription=true
             response.redirect('/books')
         })
 })
