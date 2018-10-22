@@ -20,12 +20,21 @@ text-align: center;
 .column{
   display:table-cell;
 }
+#trinh{
+  width: 33vw;
+}
+#morgana{
+  width: 33vw;
+}
+#baukje{
+  width: 33vw;
+}
 
 @media screen and (orientation: landscape) {
 .circle{
   border-radius:50%;
   /* height:20vw; */
-  width: 20vw;
+  height: 15vw;
   border: solid 0.5vw white;
 }
 h2 {
@@ -35,7 +44,7 @@ h2 {
 .github {
   width: 10vh;
  }
- 
+
  .linkedin {
    width: 5vh;
  }
@@ -60,7 +69,7 @@ h3 {
   .github {
     width: 10vw;
    }
-   
+
    .linkedin {
      width: 5vw;
    }
@@ -72,7 +81,7 @@ h3 {
   }
   }
 
- 
+
 #footer {
     text-align: center;
     bottom: 0;
