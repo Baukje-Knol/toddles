@@ -222,8 +222,8 @@ app.get('/books', (request, response) => {
 app.get('/book/:name', (request, response) => {
     console.log(request.session.user)
     let user = request.session.user
-    if (user.subscription === false) {
-        response.redirect('/freebooks');
+    if (user == null) {
+        response.redirect('/');
     } else {
         var name = request.params.name
         fs.readFile('./book_links.json', function (err, data) {
