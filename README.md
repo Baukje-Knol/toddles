@@ -54,13 +54,12 @@
 
 ##### Finally: ENJOY IN YOUR FAVOURITE BROWSER :) #####
 
-
-## Authors: ##
-#### [Morgana](https://www.linkedin.com/in/morgana-f-sá-maia/), [Trinh](https://www.linkedin.com/in/tutrinhnguyenha/), [Baukje](https://www.linkedin.com/in/baukje-knol/) ####
-
 ## Views ##
 ![Register](/public/images/screenshot4.png)
 
 ![Books](/public/images/screenshot2.png)
 
 ![Subscription](/public/images/screenshot3.png)
+
+## Authors: ##
+#### [Morgana](https://www.linkedin.com/in/morgana-f-sá-maia/), [Trinh](https://www.linkedin.com/in/tutrinhnguyenha/), [Baukje](https://www.linkedin.com/in/baukje-knol/) ####
